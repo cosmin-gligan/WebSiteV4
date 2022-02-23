@@ -21,6 +21,7 @@ public class CustomerService {
     public void update(Customer customer) {
 //        phone number Validation -> phone sa contina doar cifre, un anumit numar de caractere
         phoneNoValidator(customer.getPhone());
+        nameValidator(customer.getName());
         customerDao.update(customer);
     }
 
@@ -66,5 +67,12 @@ public class CustomerService {
             NumberUtils.validateDigit(String.valueOf(phoneNoDigits[i]));
         }
     }
+
+    public void nameValidator(String name){
+        if (name == null || name.trim().length() == 0) {
+            throw new IllegalArgumentException("Name cannot be blank!");
+        }
+    }
+
 
 }

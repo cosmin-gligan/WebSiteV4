@@ -3,6 +3,8 @@ package siit.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import siit.db.OrderDao;
+import siit.exceptions.EmptyResourceException;
+import siit.exceptions.ResourceExistsException;
 import siit.model.Order;
 import siit.model.OrderProduct;
 
@@ -52,10 +54,19 @@ public class OrderService {
     }
 
     public void add(Order order) {
-        // validations for order number
+        if ( order.getNumber() == null || order.getNumber().trim().length() == 0)
+            throw new EmptyResourceException("Order number cannot be blank");
+
+        Order duplicateOrder = getByNumber(order.getNumber());
+        if (duplicateOrder != null ){
+            throw new ResourceExistsException("Order with number " + order.getNumber() + " already exists !");
+        }
         order.setPlaced(LocalDateTime.now());
         orderDao.add(order);
     }
 
 
+    public void delete(int orderId) {
+        orderDao.delete(orderId);
+    }
 }

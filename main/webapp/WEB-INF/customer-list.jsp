@@ -33,7 +33,6 @@
                     <td>
                         <a href="<c:url value="/customers/${customer.id}/edit"/> " class="btn btn-info">Edit</a>
                         <a href="<c:url value="/customers/${customer.id}/orders"/> " class="btn btn-info">View Orders</a>
-                        <a href="<c:url value="/customers/${customer.id}/invoice"/> " class="btn btn-info" target="_blank">View Total Sales</a>
                     </td>
                 </tr>
             </c:forEach>

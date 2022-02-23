@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import siit.exceptions.EmptyResourceException;
+import siit.exceptions.ResourceExistsException;
 import siit.model.Customer;
 import siit.model.Order;
 import siit.service.CustomerService;
@@ -41,41 +43,32 @@ public class OrderController {
     @RequestMapping(method = RequestMethod.POST, path = "/customers/{customerId}/orders/add")
     public ModelAndView addOrderV1(@ModelAttribute Order order) {
         ModelAndView modelAndView = new ModelAndView("customer-order-add");
-        Order dbOrder = orderService.getByNumber(order.getNumber());
-        if (dbOrder == null) {
+        try{
             orderService.add(order);
             modelAndView.setViewName("redirect:/customers/" + order.getCustomerId() + "/orders");
-        } else {
+        } catch (EmptyResourceException | ResourceExistsException e){
             Customer customer = new Customer();
             customer.setId(order.getCustomerId());
             modelAndView.addObject("customer", customer);
-            modelAndView.addObject("error", "The order [ " + order.getNumber() + " ] already exists!!");
+            modelAndView.addObject("error", e.getMessage());
         }
 
         return modelAndView;
     }
 
-//    @RequestMapping(method = RequestMethod.POST, path = "/customers/{customerId}/orders/add")
-    public ModelAndView addOrderV2(@ModelAttribute Order order) {
-        ModelAndView modelAndView = new ModelAndView("customer-order-add");
 
-        if (orderService.getByNumberV2(order.getNumber())) {
-            orderService.add(order);
-            modelAndView.setViewName("redirect:/customers/" + order.getCustomerId() + "/orders");
-        } else {
-            Customer customer = new Customer();
-            customer.setId(order.getCustomerId());
-            modelAndView.addObject("customer", customer);
-            modelAndView.addObject("error", "Something was wrong... :)");
-        }
-
-        return modelAndView;
-    }
 
 //    http://localhost:8080/api/customers/1/orders/3
     @RequestMapping(method = RequestMethod.GET, path = "/api/customers/{cId}/orders/{oId}")
     @ResponseBody
     public Order getOrderForOrderEdit(@PathVariable("cId") Integer customerId, @PathVariable("oId") Integer orderId){
         return orderService.getBy(customerId, orderId);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/customers/{customerId}/orders/{orderId}/delete")
+    public ModelAndView deleteOrder(@PathVariable int customerId, @PathVariable int orderId){
+        ModelAndView mav = new ModelAndView("redirect:/customers/" + customerId + "/orders");
+        orderService.delete(orderId);
+        return mav;
     }
 }

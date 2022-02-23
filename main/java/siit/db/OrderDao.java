@@ -1,6 +1,7 @@
 package siit.db;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -39,7 +40,7 @@ public class OrderDao {
         Order order = null;
         try {
             order = jdbcTemplate.queryForObject(sql, this::extractOrder, number);
-        } catch (IncorrectResultSizeDataAccessException e) {
+        } catch (DataAccessException e) {
             //ops
         }
         return order;
@@ -60,5 +61,10 @@ public class OrderDao {
     public void add(Order order) {
         String sql = "INSERT INTO ORDERS(customer_id, number, placed) VALUES (?,?,?)";
         jdbcTemplate.update(sql, order.getCustomerId(), order.getNumber(), order.getPlaced());
+    }
+
+    public void delete(int orderId) {
+        String sql = "DELETE FROM orders WHERE id = ?";
+        jdbcTemplate.update(sql, orderId);
     }
 }

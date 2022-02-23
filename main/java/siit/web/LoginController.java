@@ -1,21 +1,22 @@
 package siit.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import siit.service.UserService;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.naming.AuthenticationException;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
 @Controller
 @RequestMapping("/login")
 public class LoginController {
+
+    @Autowired
+    UserService userService;
 
     @RequestMapping(method = RequestMethod.GET)
 //    @GetMapping
@@ -29,16 +30,15 @@ public class LoginController {
     protected ModelAndView performLogin(HttpSession session, @RequestParam("user") String userName, @RequestParam String password) {
         ModelAndView mav = new ModelAndView();
 
-        if (userName.equals(password)) {
-            //logare cu succes
-//            mav.addObject("logged_user", userName);
-            session.setAttribute("logged_user", userName);
+        try {
+            session.setAttribute("logged_user", userService.getByNameAndPassword(userName, password).getName());
             mav.setViewName("redirect:/customers");
-        } else {
-            String errorMessage = "User and password do not match!";
-            mav.addObject("error", errorMessage);
+        } catch (AuthenticationException | SecurityException e) {
+            mav.addObject("error", e.getMessage());
             mav.setViewName("login");
         }
+
+
         return mav;
     }
 }

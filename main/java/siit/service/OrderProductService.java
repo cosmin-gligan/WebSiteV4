@@ -37,7 +37,9 @@ public class OrderProductService {
             }
         }
         //produsul nu exista in Order, il adaugam
-        orderProductsDao.insert(orderProduct);
+        orderProduct.setProduct(productService.getBy(orderProduct.getProductId()));
+        OrderProduct orderProductInsert = orderProductsDao.insert(orderProduct);
+        orderProduct.setId(orderProductInsert.getId());
         return orderProduct;
     }
 
@@ -45,8 +47,8 @@ public class OrderProductService {
         orderProductsDao.update(orderProduct);
     }
 
-    private void insert(OrderProduct orderProduct){
-        orderProductsDao.insert(orderProduct);
+    private OrderProduct insert(OrderProduct orderProduct){
+        return orderProductsDao.insert(orderProduct);
     }
 
     public void delete(int orderProductId) {

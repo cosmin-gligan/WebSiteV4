@@ -23,6 +23,7 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Phone</th>
+                <th>Birthday</th>
                 <th>Actions</th>
             </tr>
             <c:forEach items="${customers}" var="customer">
@@ -30,6 +31,7 @@
                     <td><c:out value="${customer.id}" /></td>
                     <td><c:out value="${customer.name}" /></td>
                     <td><c:out value="${customer.phone}" /></td>
+                    <td><c:out value="${customer.birthday}" /></td>
                     <td>
                         <a href="<c:url value="/customers/${customer.id}/edit"/> " class="btn btn-info">Edit</a>
                         <a href="<c:url value="/customers/${customer.id}/orders"/> " class="btn btn-info">View Orders</a>

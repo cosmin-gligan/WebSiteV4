@@ -32,9 +32,10 @@ public class OrderProductDao {
         jdbcTemplate.update(sql, orderProduct.getQuantity(), orderProduct.getId());
     }
 
-    public void insert(OrderProduct orderProduct) {
-        String sql = "INSERT INTO orders_products( order_id, product_id, quantity ) VALUES ( ?, ?, ? )";
-        jdbcTemplate.update(sql, orderProduct.getOrderId(), orderProduct.getProductId(), orderProduct.getQuantity());
+    public OrderProduct insert(OrderProduct orderProduct) {
+        String sql = "INSERT INTO orders_products( order_id, product_id, quantity ) VALUES ( ?, ?, ? ) RETURNING id, order_id, product_id, quantity";
+//        jdbcTemplate.update(sql, orderProduct.getOrderId(), orderProduct.getProductId(), orderProduct.getQuantity());
+        return jdbcTemplate.queryForObject(sql, this::extractOrderProduct, orderProduct.getOrderId(), orderProduct.getProductId(), orderProduct.getQuantity());
     }
 
     public void delete(int orderProductId) {

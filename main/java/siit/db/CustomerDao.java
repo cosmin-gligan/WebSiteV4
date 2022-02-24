@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +42,10 @@ public class CustomerDao {
         int id = rs.getInt("id");
         String name = rs.getString("name");
         String phone = rs.getString("phone");
-        return new Customer(id, name, phone);
+        String email = rs.getString("email");
+        LocalDate birthday = rs.getDate("birthday").toLocalDate();
+
+        return new Customer(id, name, phone, email, birthday);
     }
 
     public void update(Customer customer) {

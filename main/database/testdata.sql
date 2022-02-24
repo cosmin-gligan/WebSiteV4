@@ -56,3 +56,7 @@ FROM (values
       	('FNR98R332', 'Cat food',           3),
       	('FNR98R332', 'Logitech Mouse',     6)
       ) AS T(ORD_NAME, PRD_NAME, QUANT);
+
+
+ALTER TABLE orders_products DROP CONSTRAINT IF EXISTS orders_products_order_id_fkey;
+ALTER TABLE public.orders_products ADD CONSTRAINT orders_products_order_id_fkey FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE;

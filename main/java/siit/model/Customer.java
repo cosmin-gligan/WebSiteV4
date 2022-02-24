@@ -8,7 +8,7 @@ public class Customer {
     private String name;
     private String phone;
     private String email;
-    LocalDate date;
+    LocalDate birthday;
     List<Order> orders;
 
 
@@ -24,12 +24,12 @@ public class Customer {
         this(id, name, phone, null, null);
     }
 
-    public Customer(int id, String name, String phone, String email, LocalDate date) {
+    public Customer(int id, String name, String phone, String email, LocalDate birthday) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.date = date;
+        this.birthday = birthday;
     }
 
     public int getId() {
@@ -64,12 +64,12 @@ public class Customer {
         this.email = email;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDate getBirthday() {
+        return birthday;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 
     public List<Order> getOrders() {
@@ -87,7 +87,7 @@ public class Customer {
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
-                ", date=" + date +
+                ", date=" + birthday +
                 '}';
     }
 

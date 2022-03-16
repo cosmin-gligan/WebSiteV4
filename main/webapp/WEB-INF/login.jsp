@@ -8,6 +8,9 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous">
 </head>
+
+
+
 <body>
 
 	<div class="container">
@@ -19,7 +22,7 @@
 				</div>
 				<label class="control-label col-sm-2" for="name">Password:</label>
 				<div class="col-sm-10">
-					<input type="password" class="form-control" id="password" name="password" value="">
+                    <input type="password" class="form-control" id="password" name="password" value="">
 				</div>
 			</div>
 			
@@ -29,7 +32,12 @@
 			
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button class="btn btn-primary">Login</button> 
+					<button class="btn btn-primary">Login</button style='width:50%'>
+					<span style="width:50%" onclick="window.location='user/add'">
+                        <img src="https://d1nhio0ox7pgb.cloudfront.net/_img/v_collection_png/24x24/plain/user_add.png" alt="add user"
+                        style="float:right;"
+                        width="24px" height="24px">
+                    </span
 				</div>
 			</div>
 		</form>

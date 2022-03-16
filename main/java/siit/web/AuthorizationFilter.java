@@ -18,7 +18,10 @@ public class AuthorizationFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
 
-        if (!req.getServletPath().equals("/login") && req.getSession(true).getAttribute("logged_user") == null) {
+        if (!req.getServletPath().equals("/login")
+                && !req.getServletPath().equals("/user/add")
+                && !req.getServletPath().equals("/mail/confirmation-email")
+                && req.getSession(true).getAttribute("logged_user") == null) {
             ((HttpServletResponse) response).sendRedirect("http://localhost:8080/login");
         } else {
             chain.doFilter(request, response);

@@ -47,8 +47,6 @@ public class CustomerService {
             totalVanzari += order.getValue();
 
         }
-        //http://localhost:8080/customers/1/invoice
-//        System.out.println("Total vanzari 4 Customer ID " + totalVanzari);
 
         return totalVanzari;
     }
@@ -73,6 +71,4 @@ public class CustomerService {
             throw new IllegalArgumentException("Name cannot be blank!");
         }
     }
-
-
 }

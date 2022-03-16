@@ -11,7 +11,7 @@
 <body>
 
 	<div class="container">
-		<h2>Edit Customer</h2>
+		<h2>Edit User</h2>
 
 		<c:if test="${not empty error}">
             <div class="alert alert-danger">Error: ${error}</div>
@@ -21,18 +21,22 @@
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="name">Name:</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="name" name="name" value="<c:out value="${customer.name}"/>">
+					<input type="text" class="form-control" id="name" name="name">
 				</div>
-				<label class="control-label col-sm-2" for="phone" maxlength="20">Phone:</label>
+				<label class="control-label col-sm-2" for="phone">E-mail:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="phone" name="phone" value="${customer.phone}">
+                    <input type="text" class="form-control" id="email" name="email">
+                </div>
+                <label class="control-label col-sm-2" for="password">Password:</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="password" name="password">
                 </div>
 			</div>
 			
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button class="btn btn-primary">Save</button> 
-					<a href="<c:url value="/customers"/>" class="btn btn-warning">Cancel</a>
+					<a href="<c:url value="/login"/>" class="btn btn-warning">Cancel</a>
 				</div>
 			</div>
 		</form>

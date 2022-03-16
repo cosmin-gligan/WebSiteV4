@@ -5,6 +5,15 @@ public class User {
     String name;
     String email;
     boolean active;
+    String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public User() {
     }
@@ -46,5 +55,16 @@ public class User {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", active=" + active +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

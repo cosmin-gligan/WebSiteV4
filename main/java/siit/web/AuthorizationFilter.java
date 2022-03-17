@@ -20,7 +20,8 @@ public class AuthorizationFilter implements Filter {
 
         if (!req.getServletPath().equals("/login")
                 && !req.getServletPath().equals("/user/add")
-                && !req.getServletPath().equals("/mail/confirmation-email")
+                && !req.getServletPath().startsWith("/mail/confirmation/")
+                && !req.getServletPath().startsWith("/mail/after-mail/")
                 && req.getSession(true).getAttribute("logged_user") == null) {
             ((HttpServletResponse) response).sendRedirect("http://localhost:8080/login");
         } else {

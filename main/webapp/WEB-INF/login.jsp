@@ -25,11 +25,11 @@
                     <input type="password" class="form-control" id="password" name="password" value="">
 				</div>
 			</div>
-			
+
 			<c:if test="${not empty error}">
 				<div class="alert alert-danger">Error: ${error}</div>
 			</c:if>
-			
+
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button class="btn btn-primary">Login</button style='width:50%'>

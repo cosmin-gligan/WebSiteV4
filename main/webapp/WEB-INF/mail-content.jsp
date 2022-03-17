@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
 
@@ -53,8 +55,13 @@
                                                                         <table cellpadding="0" cellspacing="0" width="100%">
                                                                             <tbody>
                                                                                 <tr>
-                                                                                    <td align="center" class="esd-block-image" style="font-size: 0px;">
-                                                                                        <a target="_blank" href="https://viewstripo.email"><img class="adapt-img" src="https://tlr.stripocdn.email/content/guids/CABINET_aa70d5d8b09f0a654f03c311b988e274/images/97581619094358021.png" alt="Logo" style="display: block;" height="34" title="Logo"></a>
+                                                                                    <td align="center" class="esd-block-image">
+                                                                                        <strong>GARAND</strong>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <i>"In my opinion, Garand is the greatest battle implement ever devised." (lt. General George S. Patton)</i>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -108,16 +115,6 @@
                                                                         <table cellpadding="0" cellspacing="0" width="100%">
                                                                             <tbody>
                                                                                 <tr>
-                                                                                    <td align="center" class="esd-block-image" style="font-size: 0px;">
-                                                                                        <a target="_blank"><img src="https://tlr.stripocdn.email/content/guids/CABINET_2663efe83689b9bda1312f85374f56d2/images/10381620386430630.png" alt style="display: block;" width="100"></a>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td align="center" class="esd-block-text">
-                                                                                        <h2>Verify your email to finish signing up</h2>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
                                                                                     <td align="center" class="esd-block-spacer es-p10t es-p10b es-m-txt-c" style="font-size:0">
                                                                                         <table border="0" width="40%" height="100%" cellpadding="0" cellspacing="0" style="width: 40% !important; display: inline-table;">
                                                                                             <tbody>
@@ -130,9 +127,9 @@
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <td align="center" class="esd-block-text es-p5t es-p5b es-p40r es-m-p0r" esd-links-underline="none">
-                                                                                        <p>Thank you for choosing GARAND.</p>
+                                                                                        <BR><p>Thank you for choosing GARAND.</p>
                                                                                         <p><br></p>
-                                                                                        <p>Please confirm that <strong><a target="_blank" href="mailto:colin_washington@email.com" style="text-decoration: none;">${user.email}</a></strong>&nbsp;is your email address by clicking on the button below or use this link <a target="_blank" href="" style="text-decoration: none; word-break: break-all;">https://lucasandjoseph.com/confirm-email</a> within <strong>48 hours</strong>.</p>
+                                                                                        <p>Please confirm that <strong><a target="_blank" href="http://localhost:8080/mail/confirm/${user.email}" style="text-decoration: none;">${user.email}</a></strong>&nbsp;is your email address by clicking on the button below or use this link <a target="_blank" href="http://localhost:8080/mail/confirm/${user.email}" style="text-decoration: none; word-break: break-all;">http://localhost:8080/mail/confirm/${user.email}</a> within <strong>48 hours</strong>.</p>
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
@@ -145,9 +142,6 @@
                                                                                             </tbody>
                                                                                         </table>
                                                                                     </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td align="center" class="esd-block-button es-p10t es-p10b es-m-txt-l"><span class="es-button-border" style="background: #ffffff;"><a href="https://viewstripo.email" class="es-button" target="_blank" style="background: #ffffff; border-color: #ffffff;">Verify my email</a></span></td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
@@ -378,7 +372,7 @@
                                 </tr>
                             </tbody>
                         </table>
-            
+
                     </td>
                 </tr>
             </tbody>

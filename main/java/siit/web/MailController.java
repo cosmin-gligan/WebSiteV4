@@ -2,9 +2,7 @@ package siit.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import siit.exceptions.EmptyResourceException;
 import siit.exceptions.ResourceExistsException;
@@ -22,14 +20,25 @@ public class MailController {
     private UserService userService;
 
 
-    @RequestMapping(method = RequestMethod.GET, path = "/mail/confirmation-email")
-    public ModelAndView addUser(@ModelAttribute User user) {
-        System.out.println("am ajuns aici: " + user.toString());
-        ModelAndView modelAndView = new ModelAndView("mail-content");
-        modelAndView.addObject("user", user);
+    @RequestMapping(method = RequestMethod.GET, path = "/mail/confirmation/{email}/")
+    @ResponseBody
+    public ModelAndView addUser(@PathVariable String email) {
+        User user = userService.getByEmail(email);
+        ModelAndView mv = new ModelAndView("mail-content");
+        mv.addObject("user", user);
 
-        return modelAndView;
+        return mv;
     }
 
+    @RequestMapping(method = RequestMethod.GET, path = "/mail/after-mail/{email}/")
+    @ResponseBody
+    public ModelAndView afterEmailSend(@PathVariable String email) {
+        ModelAndView mv = new ModelAndView("after-email-confirmation");
+        User user  = new User();
+        user.setEmail(email);
+        mv.addObject("user", user);
+
+        return mv;
+    }
 
 }

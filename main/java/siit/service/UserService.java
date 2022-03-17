@@ -27,7 +27,8 @@ public class UserService implements UserRegistration{
     }
 
     private Optional<User> getByNameOrEmail(String name, String email){
-        return Optional.ofNullable(userDao.getByNameOrEmail(name, email));
+        User user = userDao.getByNameOrEmail(name, email);
+        return Optional.ofNullable(user);
     }
 
     @Override
@@ -38,9 +39,13 @@ public class UserService implements UserRegistration{
             throw new EmptyResourceException("Email cannot be blank");
         if ( user.getPassword() == null || user.getPassword().trim().length() == 0)
             throw new EmptyResourceException("Password cannot be blank");
-        Optional<User> duplicateUser = getByNameOrEmail(user.getName(), user.getPassword());
+        Optional<User> duplicateUser = Optional.ofNullable(getByName(user.getName()));
         if (!duplicateUser.isEmpty())
-            throw new ResourceExistsException("Numele sau email-ul sunt folosite deja! Reincercati");
+            throw new ResourceExistsException("The name is already used! Try again with a different <font color='red'><strong>name</font></strong>!");
+
+        duplicateUser = Optional.ofNullable(getByEmail(user.getEmail()));
+        if (!duplicateUser.isEmpty())
+            throw new ResourceExistsException("The email is already used! Try again with a different <font color='red'><strong>email</font></strong>!");
 
         userDao.addUser(user);
     }

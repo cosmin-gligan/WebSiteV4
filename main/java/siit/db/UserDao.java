@@ -16,13 +16,14 @@ public class UserDao {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public User getByName(String name) throws AuthenticationException  {
+    public User getByName(String name) {
         String sql = "SELECT users.* FROM users WHERE TRIM(users.name) = TRIM(?)";
+        User user = null;
         try {
-            return jdbcTemplate.queryForObject(sql, this::mapDbUser, name, name);
-        } catch (DataAccessException e){
-            throw new AuthenticationException("Wrong username and/or password");
+            user = jdbcTemplate.queryForObject(sql, this::mapDbUser, name);
+        }catch (DataAccessException e){
         }
+        return user;
     }
 
     public User getByNameAndPassword(String name, String password) throws AuthenticationException  {
@@ -41,7 +42,7 @@ public class UserDao {
         user.setEmail(rs.getString("email"));
         user.setActive(rs.getBoolean("isactive"));
 
-        if  (!user.isActive()) throw new SecurityException("User " + user.getName() + " is no longer active! Please contact the admin");
+//        if  (!user.isActive()) throw new SecurityException("User " + user.getName() + " is no longer active! Please contact the admin");
 
         return user;
     }
@@ -69,7 +70,7 @@ public class UserDao {
     }
 
     public User getByNameOrEmail(String name, String email) {
-        String sql = "SELECT users.* FROM users WHERE (users.name = ? OR email = ?";
+        String sql = "SELECT users.* FROM users WHERE (users.name ~* ? OR email ~* ?)";
         User user = null;
         try {
             user = jdbcTemplate.queryForObject(sql, this::mapDbUser, name, email);

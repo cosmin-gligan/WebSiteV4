@@ -7,6 +7,11 @@
       rel="stylesheet"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous">
+<style>
+body {
+  background-image: url('/images/pexels-pixabay-36717.jpg');
+}
+</style>
 </head>
 
 

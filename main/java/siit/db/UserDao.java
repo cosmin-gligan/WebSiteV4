@@ -63,9 +63,13 @@ public class UserDao {
         jdbcTemplate.update(sql,user.getId());
     }
 
+    public void activateUser(User user) {
+        String sql = "Update users SET isactive = true WHERE id = ?";
+        jdbcTemplate.update(sql,user.getId());
+    }
 
     public void addUser(User user) {
-        String sql = "Insert into users (name, email, pass) values (? , ? , ?)";
+        String sql = "Insert into users (name, email, pass) values (?, ?, crypt(?, gen_salt('bf', 4)))";
         jdbcTemplate.update(sql, user.getName(), user.getEmail(), user.getPassword());
     }
 

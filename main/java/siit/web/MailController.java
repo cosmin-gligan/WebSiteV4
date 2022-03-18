@@ -33,12 +33,22 @@ public class MailController {
     @RequestMapping(method = RequestMethod.GET, path = "/mail/after-mail/{email}/")
     @ResponseBody
     public ModelAndView afterEmailSend(@PathVariable String email) {
-        ModelAndView mv = new ModelAndView("after-email-confirmation");
+        ModelAndView mv = new ModelAndView("after-email-send");
         User user  = new User();
         user.setEmail(email);
         mv.addObject("user", user);
 
         return mv;
     }
+    //http://localhost:8080/mail/confirm/cosmin.gligan@gmail.com
+    @RequestMapping(method = RequestMethod.GET, path = "/mail/confirm/{email}")
+    @ResponseBody
+    public ModelAndView emailConfirmation(@PathVariable String email) {
+        ModelAndView mv = new ModelAndView("email-confirmation-success");
+        User user = userService.getByEmail(email);
+        userService.activateUser(user);
+        mv.addObject("user", user);
 
+        return mv;
+    }
 }

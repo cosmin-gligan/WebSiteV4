@@ -64,4 +64,5 @@ public class UserService implements UserRegistration{
         userDao.inactivateUser(user);
     }
 
+    public void activateUser(User user){userDao.activateUser(user);}
 }

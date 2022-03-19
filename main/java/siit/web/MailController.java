@@ -40,7 +40,7 @@ public class MailController {
 
         return mv;
     }
-    //http://localhost:8080/mail/confirm/cosmin.gligan@gmail.com
+
     @RequestMapping(method = RequestMethod.GET, path = "/mail/confirm/{email}")
     @ResponseBody
     public ModelAndView emailConfirmation(@PathVariable String email) {

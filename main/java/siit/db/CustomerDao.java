@@ -43,9 +43,10 @@ public class CustomerDao {
         String name = rs.getString("name");
         String phone = rs.getString("phone");
         String email = rs.getString("email");
+        String address = rs.getString("address");
         LocalDate birthday = rs.getDate("birthday").toLocalDate();
 
-        return new Customer(id, name, phone, email, birthday);
+        return new Customer(id, name, phone, email, birthday, address);
     }
 
     public void update(Customer customer) {

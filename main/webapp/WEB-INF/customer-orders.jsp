@@ -26,6 +26,7 @@
 					<td>
 					    <a href="<c:url value="/static/customer-order-edit-rest.html#customerId=${customer.id}&orderId=${order.id}"/> " class="btn btn-info">Edit</a>
 					    <a href="<c:url value="/customers/${customer.id}/orders/${order.id}/delete"/> " class="btn btn-info">Delete</a>
+					    <a href="<c:url value="/customers/${customer.id}/orders/${order.id}/printPDF"/>" target="_blank"><img src="/images/icons/pdf.png"></a>
                     </td>
 				</tr>
 			</c:forEach>

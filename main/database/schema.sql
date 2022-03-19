@@ -46,3 +46,5 @@ CREATE TABLE orders_products
   foreign key (product_id) references products
 );
 
+ALTER TABLE products ADD COLUMN IF NOT EXISTS image varchar(150) NOT NULL DEFAULT '';
+ALTER TABLE customers ADD COLUMN IF NOT EXISTS address TEXT NOT NULL DEFAULT '';

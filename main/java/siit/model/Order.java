@@ -9,6 +9,7 @@ public class Order {
     private String number;
     private LocalDateTime placed;
     private List<OrderProduct> orderProducts;
+    private Customer customer;
 
     public Order() {
     }
@@ -58,6 +59,14 @@ public class Order {
 
     public LocalDateTime getPlaced() {
         return placed;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public Double getValue() {

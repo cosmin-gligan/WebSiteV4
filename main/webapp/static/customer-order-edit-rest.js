@@ -45,7 +45,7 @@ $(
 )
 
 function addOrUpdateOrderProductRow(orderProduct) {
-//    console.log('orderProduct', orderProduct);
+    console.log('orderProduct', orderProduct);
     var existingRow = $("#op_" + orderProduct.product.id);
     if (existingRow.length == 1) {
         existingRow.find('[name="spanQuantity"]')
@@ -67,7 +67,7 @@ function addOrderProductRow(orderProduct) {
             <th>${orderProduct.product.name}</th>
             <th><span name="spanQuantity">${orderProduct.quantity}</span></th>
             <th><span name="spanValue">${orderProduct.value}</span></th>
-<!--            <th><img src="${orderProduct.product.url}" width="15px height=15px"/></th>-->
+            <th><img src="${orderProduct.product.image}" width="15px" height="15px"/></th>
             <th><button name="buttonProductRemove" class="btn btn-info">Remove</button></th>
         </tr>
     `);

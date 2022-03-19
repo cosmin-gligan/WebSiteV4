@@ -5,7 +5,7 @@ public class Product {
     private String name;
     private Double weight;
     private Double price;
-    private String url;
+    private String image;
 
     public Product(Integer id) {
         this.id = id;
@@ -16,7 +16,7 @@ public class Product {
         this.name = name;
         this.weight = weight;
         this.price = price;
-        this.url = "";
+        this.image = "/images/products/not-found.png";
     }
 
     public Integer getId() {
@@ -51,8 +51,8 @@ public class Product {
         this.price = price;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", weight=" + weight +
                 ", price=" + price +
-                ", url='" + url + '\'' +
+                ", image='" + image + '\'' +
                 '}';
     }
 }

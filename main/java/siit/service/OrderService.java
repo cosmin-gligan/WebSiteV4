@@ -19,6 +19,9 @@ public class OrderService {
     @Autowired
     private OrderProductService orderProductService;
 
+    @Autowired
+    private CustomerService customerService;
+
     public List<Order> getBy(Integer customerId) {
         List<Order> orders = orderDao.getAllBy(customerId);
         for (Order order: orders){
@@ -33,6 +36,7 @@ public class OrderService {
         List<Order> orders = getBy(customerId);
         for (Order order : orders) {
             if (order.getId().equals(orderId)) {
+                order.setCustomer(customerService.getBy(customerId));
                 return order;
             }
         }

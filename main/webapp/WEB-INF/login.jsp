@@ -7,10 +7,41 @@
       rel="stylesheet"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous">
+ <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+          rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
 <style>
-body {
-  background-image: url('/images/pexels-pixabay-36717.jpg');
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
 }
+
+body {
+    background-image: url('/images/login_background3.jpg');
+    background-position-x: center;
+    background-position-y: bottom;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+@media screen and (orientation:portrait) {
+    body {
+        background-position-y: top;
+        -webkit-background-size: contain;
+        -moz-background-size: contain;
+        -o-background-size: contain;
+        background-size: contain;
+    }
 </style>
 </head>
 
@@ -49,4 +80,8 @@ body {
 	</div>
 
 </body>
+<script>
+    $('#user').focus();
+    $('#user').select();
+</script>
 </html>

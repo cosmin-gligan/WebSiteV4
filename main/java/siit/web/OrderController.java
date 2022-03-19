@@ -1,6 +1,7 @@
 package siit.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,16 +11,33 @@ import siit.model.Customer;
 import siit.model.Order;
 import siit.service.CustomerService;
 import siit.service.OrderService;
+import siit.utils.HttpUtils;
+import siit.utils.PdfUtils;
+
+import javax.annotation.Resource;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import static siit.common.Constants.pdfPath;
 
 @Controller
 @RequestMapping("")
-////    http://localhost:8080/customers/{customerId}/orders GET
 public class OrderController {
 
     @Autowired
     private CustomerService customerService;
     @Autowired
     private OrderService orderService;
+
+    @Resource
+    HttpUtils httpUtils;
+
+    @Resource
+    PdfUtils pdfUtils;
+
+
 
     @RequestMapping(method = RequestMethod.GET, path = "/customers/{customerId}/orders")
     public ModelAndView renderOrderPage(@PathVariable Integer customerId) {
@@ -41,7 +59,7 @@ public class OrderController {
 
     //    http://localhost:8080/customers/1/orders/add
     @RequestMapping(method = RequestMethod.POST, path = "/customers/{customerId}/orders/add")
-    public ModelAndView addOrderV1(@ModelAttribute Order order) {
+    public ModelAndView addOrder(@ModelAttribute Order order) {
         ModelAndView modelAndView = new ModelAndView("customer-order-add");
         try{
             orderService.add(order);
@@ -71,4 +89,51 @@ public class OrderController {
         orderService.delete(orderId);
         return mav;
     }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/customers/{customerId}/orders/{orderId}/printPDF")
+    @ResponseBody
+    public ModelAndView printPDF(@PathVariable int customerId, @PathVariable int orderId) {
+        Order order = orderService.getBy(customerId, orderId);
+
+        String htmlInvoice = null;
+        String fileName = order.getNumber() + ".pdf";
+
+
+        pdfUtils.printPDF("/api/print/" + order.getCustomerId() + "/orders/" + order.getId(), "/invoices/" + fileName );
+
+        ModelAndView mav = new ModelAndView("redirect:/invoices/" + fileName);
+
+        mav.addObject("order", order);
+
+        return mav;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/api/print/{customerId}/orders/{orderId}")
+    public ModelAndView printHTML(@PathVariable int customerId, @PathVariable int orderId) {
+        ModelAndView mav = new ModelAndView("invoicePDF");
+        Order order = orderService.getBy(customerId, orderId);
+        mav.addObject("order", order);
+
+        return mav;
+    }
+
+
+
+    @GetMapping(value="/invoices/{fileName}",produces= MediaType.APPLICATION_PDF_VALUE)
+    public @ResponseBody byte[] displayPDF(@PathVariable String fileName) {
+        try {
+            FileInputStream fis = new FileInputStream(new File(pdfPath + "invoices/" + fileName));
+            byte[] targetArray = new byte[fis.available()];
+            fis.read(targetArray);
+            return targetArray;
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

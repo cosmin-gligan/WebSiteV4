@@ -8,6 +8,8 @@ public class Customer {
     private String name;
     private String phone;
     private String email;
+    private String address;
+
     LocalDate birthday;
     List<Order> orders;
 
@@ -16,20 +18,21 @@ public class Customer {
     }
 
     public Customer(int id, String name) {
-        this(id, name, null, null, null);
+        this(id, name, null, null, null, null);
 
     }
 
     public Customer(int id, String name, String phone) {
-        this(id, name, phone, null, null);
+        this(id, name, phone, null, null, null);
     }
 
-    public Customer(int id, String name, String phone, String email, LocalDate birthday) {
+    public Customer(int id, String name, String phone, String email, LocalDate birthday, String address) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.birthday = birthday;
+        this.address = address;
     }
 
     public int getId() {
@@ -78,6 +81,14 @@ public class Customer {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Override

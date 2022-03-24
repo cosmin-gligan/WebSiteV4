@@ -11,7 +11,7 @@ import java.util.List;
 public class OrderProductsController {
     @Autowired
     OrderProductService orderProductService;
-    //    http://localhost:8080/api/customers/1/orders/3/products
+
     @GetMapping("/api/customers/{cId}/orders/{oId}/products")
     public List<OrderProduct> getAllOrderProductsBy(@PathVariable("cId") Integer customerId, @PathVariable("oId") Integer orderId) {
         return orderProductService.getAllBy(customerId, orderId);

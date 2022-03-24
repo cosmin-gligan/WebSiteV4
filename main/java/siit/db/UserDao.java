@@ -42,8 +42,6 @@ public class UserDao {
         user.setEmail(rs.getString("email"));
         user.setActive(rs.getBoolean("isactive"));
 
-//        if  (!user.isActive()) throw new SecurityException("User " + user.getName() + " is no longer active! Please contact the admin");
-
         return user;
     }
 

@@ -12,7 +12,7 @@
 		<header class="top">
                 <div class="row">
                     <div class="col-sm-4 offset-md-4">
-                        <h1 class="title">Edit Customer</h1> </div>
+                        <h1 class="title">Add new customer</h1> </div>
                 </div>
             </header>
 		<div class="container">
@@ -20,7 +20,7 @@
 			<article class="col-md-12">
                     <div class="row">
                         <div class="col-sm-4 offset-md-4">
-                            <form class="panel" role="form" method="post">
+                            <form class="panel" role="form" method="POST">
 								<c:if test="${not empty error}">
 									<div class="alert alert-danger">Error: ${error}</div>
 								</c:if>
@@ -57,12 +57,13 @@
 									</div>
                                 </div>
 
+
 							    <div class="row">
 									<div class="col-md-12">
 										<button class="chic-button">Save</button>
-							            <a href="/customers" style="text-decoration:none">
+									    <a href="/customers" style="text-decoration:none">
                                             <input type="button" class="button-exit" value="Exit"/>
-                                         </a>
+                                        </a>
 									</div>
 								</div>
                             </form>
@@ -73,6 +74,11 @@
 	</main>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-      <script src="../../js/formscript.js"></script>
+    <script src="../../js/formscript.js"></script>
+
+    <script>
+            $('#name').focus();
+            $('#name').select();
+    </script>
 </body>
 </html>

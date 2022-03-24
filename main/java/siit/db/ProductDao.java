@@ -24,7 +24,8 @@ public class ProductDao {
         String name = rs.getString("name");
         Double weight = rs.getDouble("weight");
         Double price = rs.getDouble("price");
-        return new Product(id, name, weight, price);
+        String image = rs.getString("image");
+        return new Product(id, name, weight, price, image);
     }
 
     public List<Product> getAllByName(String name) {

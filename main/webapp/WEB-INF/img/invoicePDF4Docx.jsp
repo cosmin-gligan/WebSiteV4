@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -128,8 +129,13 @@
 					<td colspan="2">
 						<table>
 							<tr>
+                                <c:set var="scheme" value="${pageContext.request.scheme}"/>
+                                <c:set var="serverName" value="${pageContext.request.serverName}"/>
+                                <c:set var="serverPort" value="${pageContext.request.serverPort}"/>
+                                <c:set var="baseURL" value="${scheme}://${serverName}:${serverPort}"/>
+
 								<td class="title" align="left">
-									<img src="/images/logo.png" width="250px"/>
+									<img src="${baseURL}/images/logo.png" width="250px"/>
 								</td>
 
 								<td>
@@ -166,13 +172,13 @@
                 <table>
 				<tr class="heading">
 					<td>Payment Method</td>
-					<td>&nbsp;</td>
+					<td >&nbsp;</td>
 					<td>Check #</td>
 				</tr>
 
 				<tr class="details">
 					<td>Check</td>
-	                <td>&nbsp;</td>
+                    <td >&nbsp;</td>
 					<td>&#36;${order.getValue()}</td>
 				</tr>
 
@@ -185,7 +191,7 @@
                 <c:forEach items="${order.orderProducts}" var="orderProduct">
                     <tr class="item">
                         <td>${orderProduct.product.name}</td>
-                        <td><img src="${orderProduct.product.image}" width="50px" height="50px"/></td>
+                        <td><img src="${baseURL}/${orderProduct.product.image}" width="50px" height="50px"/></td>
                         <td>&#36;${orderProduct.value}</td>
                     </tr>
                 </c:forEach>

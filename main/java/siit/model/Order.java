@@ -1,6 +1,7 @@
 package siit.model;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class Order {
@@ -8,17 +9,21 @@ public class Order {
     private Integer customerId;
     private String number;
     private LocalDateTime placed;
+    private LocalDateTime delivery;
+    private int statuscode;
     private List<OrderProduct> orderProducts;
     private Customer customer;
 
     public Order() {
     }
 
-    public Order(Integer id, Integer customerId, String number, LocalDateTime placed) {
+    public Order(Integer id, Integer customerId, String number, LocalDateTime placed, int statuscode) {
         this.id = id;
         this.customerId = customerId;
         this.number = number;
         this.placed = placed;
+        this.delivery = LocalDateTime.now().plus(1, ChronoUnit.DAYS);
+        this.statuscode = statuscode;
     }
 
     public void setId(Integer id) {
@@ -67,6 +72,22 @@ public class Order {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public LocalDateTime getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(LocalDateTime delivery) {
+        this.delivery = delivery;
+    }
+
+    public int getStatuscode() {
+        return statuscode;
+    }
+
+    public void setStatuscode(int statuscode) {
+        this.statuscode = statuscode;
     }
 
     public Double getValue() {

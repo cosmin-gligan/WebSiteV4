@@ -50,7 +50,31 @@ public class CustomerDao {
     }
 
     public void update(Customer customer) {
-        String sql = "UPDATE CUSTOMERS SET name=?, phone=? WHERE id =?";
-        jdbcTemplate.update(sql, customer.getName(), customer.getPhone(), customer.getId());
+        String sql = "UPDATE CUSTOMERS SET name=?, phone=?, email = ?, address = ? WHERE id =?";
+        jdbcTemplate.update(sql, customer.getName(), customer.getPhone(), customer.getEmail(), customer.getAddress(),customer.getId());
+    }
+
+    public void add(Customer customer){
+
+        String sql = "INSERT INTO customers(name, phone, email, address, birthday) VALUES ( ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, customer.getName(), customer.getPhone(), customer.getEmail(), customer.getAddress(), customer.getBirthday());
+
+    }
+
+    public Customer getByName(String name) {
+        Customer customer = null;
+        String sql = "SELECT * FROM CUSTOMERS WHERE name = ?";
+
+        try {
+            return jdbcTemplate.queryForObject(sql, this::extractCustomer, name);
+        } catch ( EmptyResultDataAccessException e) {
+            //nu am tratat intentionat, sa mearga NULL daca nu exista
+        }
+        return customer;
+    }
+
+    public void delete(Integer customerID) {
+        String sql = "DELETE FROM customers WHERE id = ?";
+        jdbcTemplate.update(sql, customerID);
     }
 }

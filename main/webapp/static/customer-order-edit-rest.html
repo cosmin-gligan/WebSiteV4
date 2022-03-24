@@ -13,7 +13,9 @@
             crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
             integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-            crossorigin="anonymous"></script>
+            crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="/css/style.css">
 
     <script src="url.js"></script>
     <script src="customer-order-edit-rest.js"></script>
@@ -22,13 +24,22 @@
     </script>
 </head>
 <body>
-<div class="container">
-    <h2>
-        Edit order <span id="titleOrderNumber" ></span>&nbsp;&nbsp;
-        <a id="buttonDone" class="btn btn-primary">Done</a>
-    </h2>
 
-    <table id="productTable" class="table table-striped">
+<header class="top" style="margin-bottom:25px">
+    <div class="row">
+        <div class="col-sm-4 offset-md-4">
+            <h1 class="title">Edit order <span id="titleOrderNumber" ></span></h1>
+            <div style="text-align:center">
+                    <a id="buttonDone" class="btn btn-primary" style="background: #ffc107; border: 1px solid #ffc107;">Exit</a>
+                    <a id="buttonCheckOut" class="btn btn-primary" style="background: #3fff00; border: 1px solid #3fff00;">Checkout</a>
+                </h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <table id="productTable" class="table table-bordered table-light">
         <tr>
             <th>Product</th>
             <th>Quantity</th>
@@ -39,12 +50,14 @@
         <tr id="productAddFormRow">
             <td><input type="text" id="productAddName" class="form-control" placeholder="Product"></td>
             <td><input type="number" id="productAddQuantity" class="form-control" placeholder="Quantity"></td>
-            <td><img src="/images/products/not-found.png"></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
             <td><button id="buttonProductAdd" class="btn btn-info">Add</button></td>
         </tr>
     </table>
     <input type="hidden" id="productAddId">
     <input type="hidden" id="productAddPrice">
+    <input type="hidden" id="productAddImage">
 </div>
 </body>
 </html>

@@ -11,7 +11,15 @@ body {
 
 }
 
-.chic-a-button
+.chic-a-button{
+	
+    background: #5F47B6;
+    border-radius: 3px;
+    color: #fff;
+    border: 1px solid #5F47B6;
+    font-weight: 400;
+	
+}
 
 .panel {
     position: relative;
@@ -332,8 +340,39 @@ input[type=radio]:checked:before {
     border: 1px solid #5540a4;
 }
 
+.button-exit {
+    margin-top: 20px;
+    padding: 10px 0;
+    float: right;
+    background: #ffc107;
+    border-radius: 3px;
+    color: #000;
+    border: 1px solid #ffc107;
+    font-weight: 400;
+    width: 100%;
+}
 
-/* EN SON EKLENEN CSSLER */
+.button-exit:hover {
+    background-color: #ffc109;
+    ;
+    border: 1px solid #ffc109;
+}
+
+.button-exit-small {
+    margin-top: 20px;
+    padding: 10px 0;
+    float: right;
+    background: #ffc107;
+    border-radius: 3px;
+    color: #000;
+    border: 1px solid #ffc107;
+    font-weight: 400;
+}
+.button-exit-small:hover {
+    background-color: #ffc109;
+    ;
+    border: 1px solid #ffc109;
+}
 
 
 /* ============ MODAL =========== */

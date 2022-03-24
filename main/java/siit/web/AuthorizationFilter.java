@@ -26,7 +26,11 @@ public class AuthorizationFilter implements Filter {
                 && !req.getServletPath().startsWith("/images/")
                 && !req.getServletPath().startsWith("/invoices/")
                 && !req.getServletPath().startsWith("/api/print/")
+                && !req.getServletPath().startsWith("/api/print4Email/")
+                && !req.getServletPath().startsWith("/js/")
+                && !req.getServletPath().startsWith("/css/")
                 && req.getSession(true).getAttribute("logged_user") == null) {
+
             ((HttpServletResponse) response).sendRedirect("http://localhost:8080/login");
         } else {
             chain.doFilter(request, response);

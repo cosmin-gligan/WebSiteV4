@@ -69,6 +69,11 @@ public class OrderService {
         orderDao.add(order);
     }
 
+    public void submitOrder(Order order){
+
+        orderDao.submitOrder(order);
+
+    }
 
     public void delete(int orderId) {
         orderDao.delete(orderId);

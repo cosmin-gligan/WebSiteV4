@@ -60,3 +60,11 @@ FROM (values
 
 ALTER TABLE orders_products DROP CONSTRAINT IF EXISTS orders_products_order_id_fkey;
 ALTER TABLE public.orders_products ADD CONSTRAINT orders_products_order_id_fkey FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE;
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS status_code SMALLINT NOT NULL DEFAULT 0;
+
+UPDATE products SET image = '/images/products/cat-food.png' WHERE name ~* 'cat food';
+UPDATE products SET image = '/images/products/dog-food.png' WHERE name ~* 'dog food';
+UPDATE products SET image = '/images/products/roasted-beans.png' WHERE name ~* 'roasted';
+UPDATE products SET image = '/images/products/keyboard.png' WHERE name ~* 'keyboard';
+UPDATE products SET image = '/images/products/mouse.png' WHERE name ~* 'mouse';
+UPDATE products SET image = '/images/products/light-bulb.png' WHERE name ~* 'light';

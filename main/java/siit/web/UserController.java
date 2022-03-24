@@ -11,6 +11,7 @@ import siit.exceptions.EmptyResourceException;
 import siit.exceptions.ResourceExistsException;
 import siit.model.User;
 import siit.service.UserService;
+import siit.utils.MailUtils;
 
 import javax.naming.AuthenticationException;
 import java.util.concurrent.ExecutionException;
@@ -24,9 +25,11 @@ public class UserController {
     private UserService userService;
     @Autowired
     private RegistrationEmail registrationEmail;
+    @Autowired
+    private MailUtils mailUtils;
 
     @RequestMapping(method = RequestMethod.GET, path = "/user/add")
-    public ModelAndView renderCustomerOrderAddPage() {
+    public ModelAndView renderUserEditPage() {
         ModelAndView mav = new ModelAndView("user-edit");
         return mav;
     }
@@ -36,7 +39,7 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView("user-edit");
         try {
             userService.addUser(user);
-            registrationEmail.sendEmail(registrationEmail.getEmailContent(user), user);
+            mailUtils.sendEmail(registrationEmail.getEmailContent(user), user.getEmail(), "Welcome to Garand");
             modelAndView.setViewName("redirect:/mail/after-mail/" + user.getEmail() + "/");
             modelAndView.addObject("user", user);
         } catch (AuthenticationException
@@ -44,7 +47,7 @@ public class UserController {
                     | EmptyResourceException
                     | InterruptedException
                     | ExecutionException
-                    |TimeoutException
+                    | TimeoutException
         e) {
             modelAndView.addObject("error", e.getMessage());
         }

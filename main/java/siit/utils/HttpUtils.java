@@ -25,7 +25,7 @@ public class HttpUtils {
                 response =  new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
             }
         }catch (IOException e)  {
-            System.out.println(e.getMessage());
+            throw new RuntimeException("Eror while reading URL into String: " + e.getMessage());
         }
 
         if ( response == null)

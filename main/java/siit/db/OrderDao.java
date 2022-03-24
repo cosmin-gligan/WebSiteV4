@@ -31,8 +31,9 @@ public class OrderDao {
         Integer id = rs.getInt("id");
         Integer customerId = rs.getInt("customer_id");
         String name = rs.getString("number");
+        int statuscode = rs.getInt("status_code");
         LocalDateTime placed = rs.getTimestamp("placed").toLocalDateTime();
-        return new Order(id, customerId, name, placed);
+        return new Order(id, customerId, name, placed, statuscode);
     }
 
     public Order getByNumber(String number) {
@@ -66,5 +67,10 @@ public class OrderDao {
     public void delete(int orderId) {
         String sql = "DELETE FROM orders WHERE id = ?";
         jdbcTemplate.update(sql, orderId);
+    }
+
+    public void submitOrder(Order order) {
+        String sql = "UPDATE orders SET status_code = 1 WHERE id = ?";
+        jdbcTemplate.update(sql, order.getId());
     }
 }

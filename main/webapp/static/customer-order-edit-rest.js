@@ -8,8 +8,20 @@ $(
     () => {
         $.getJSON(`/api/customers/${customerId}/orders/${orderId}`)
             .done((order) => {
-                $('#titleOrderNumber').text(order.number);
+//                console.log(order);
+                $('#titleOrderNumber').text(order.number + '/' + order.customer.name);
                 $('#buttonDone').attr('href', `/customers/${customerId}/orders/`);
+//                $('#buttonCheckOut').attr('href', `/customers/${customerId}/orders/${order.id}/checkout`);
+                $('#buttonCheckOut').click(() => {
+
+                     $.ajax({
+                                url: `/customers/${customerId}/orders/${order.id}/checkout`,
+                                type: 'POST'
+                            }).done(exitBtnClick);
+                            ;
+
+                });
+
             });
 
         $.getJSON(`/api/customers/${customerId}/orders/${orderId}/products`)
@@ -26,7 +38,8 @@ $(
             var productName = $('#productAddName').val();
             var quantity = $('#productAddQuantity').val();
             var price = $('#productAddPrice').val();
-            $('#productAddId, #productAddName, #productAddQuantity, #productAddPrice').val(null);
+            var image = $('#productAddImage').val();
+            $('#productAddId, #productAddName, #productAddQuantity').val(null);
 
             $.ajax({
                 url: `/api/customers/${customerId}/orders/${orderId}/products`,
@@ -34,7 +47,7 @@ $(
                 dataType: 'json',
                 contentType: 'application/json',
                 data: JSON.stringify({
-                    product: {id: productId, name: productName, price: price, weight: 0},
+                    product: {id: productId, name: productName, price: price, weight: 0, image: image},
                     quantity: quantity,
                     productId : productId,
                     orderId : orderId
@@ -45,7 +58,7 @@ $(
 )
 
 function addOrUpdateOrderProductRow(orderProduct) {
-    console.log('orderProduct', orderProduct);
+//    console.log('orderProduct', orderProduct);
     var existingRow = $("#op_" + orderProduct.product.id);
     if (existingRow.length == 1) {
         existingRow.find('[name="spanQuantity"]')
@@ -67,7 +80,7 @@ function addOrderProductRow(orderProduct) {
             <th>${orderProduct.product.name}</th>
             <th><span name="spanQuantity">${orderProduct.quantity}</span></th>
             <th><span name="spanValue">${orderProduct.value}</span></th>
-            <th><img src="${orderProduct.product.image}" width="15px" height="15px"/></th>
+            <th align="center"><img src="${orderProduct.product.image}" width="50px" height="50px"/></th>
             <th><button name="buttonProductRemove" class="btn btn-info">Remove</button></th>
         </tr>
     `);
@@ -88,6 +101,7 @@ function searchProductByTerm(term, resultCallback) {
         .done((products) => {
             resultCallback(products.map((p) => {
                 $('#productAddPrice').val(p.price);
+                $('#productAddImage').val(p.image);
                 return {
                     id: p.id,
                     label: p.name + ' ' + p.price + '$',
@@ -95,4 +109,9 @@ function searchProductByTerm(term, resultCallback) {
                 }
             }))
         })
+}
+
+function exitBtnClick(){
+   alert('Order was successfully submited! Check your inbox!')
+   document.getElementById("buttonDone").click();
 }

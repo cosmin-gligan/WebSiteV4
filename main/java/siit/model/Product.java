@@ -11,13 +11,14 @@ public class Product {
         this.id = id;
     }
 
-    public Product(Integer id, String name, Double weight, Double price) {
+    public Product(Integer id, String name, Double weight, Double price, String image) {
         this.id = id;
         this.name = name;
         this.weight = weight;
         this.price = price;
-        this.image = "/images/products/not-found.png";
+        this.image = image;
     }
+
 
     public Integer getId() {
         return id;
@@ -49,6 +50,10 @@ public class Product {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public String getImage() {
+        return image;
     }
 
     public void setImage(String image) {

@@ -1,5 +1,7 @@
 package siit.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -10,7 +12,9 @@ public class Customer {
     private String email;
     private String address;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     LocalDate birthday;
+
     List<Order> orders;
 
 
@@ -89,6 +93,14 @@ public class Customer {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Double getTotalSales(){
+        double totalSales = 0.0;
+        for ( Order order : getOrders()){
+            totalSales += order.getValue();
+        }
+        return totalSales;
     }
 
     @Override

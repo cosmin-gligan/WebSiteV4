@@ -32,7 +32,7 @@ public class LoginController {
 
         try {
             session.setAttribute("logged_user", userService.getByNameAndPassword(userName, password).getName());
-            mav.setViewName("redirect:/customers");
+            mav.setViewName("redirect:/main");
         } catch (AuthenticationException | SecurityException e) {
             mav.addObject("error", e.getMessage());
             mav.setViewName("login");

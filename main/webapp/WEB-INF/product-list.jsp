@@ -13,7 +13,7 @@
   <body>
 	<header>
 		<nav class="navbar navbar-expand-lg navbar-light">
-			<div class="container"> <b><a class="navbar-brand d-flex align-items-center">Customer List</a></b>
+			<div class="container"> <b><a class="navbar-brand d-flex align-items-center">Product List</a></b>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <i class="fa fa-bars"></i> </button>
 				<div class="collapse navbar-collapse navbar-right justify-content-end" id="navbarNav">
 
@@ -34,28 +34,24 @@
 
        <table class="table table-bordered table-light">
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Phone</th>
-                <th scope="col">E-mail</th>
-                <th scope="col">Address</th>
-                <th scope="col">Birthday</th>
-                <th scope="col">Actions<a href='/customers/add/' class="btn chic-a-button" style="margin-left:10px;  background-color: green;">Add customer</a></th>
+                <th scope="col" align="center">ID</th>
+                <th scope="col" align="center">Name</th>
+                <th scope="col" align="center">Weight</th>
+                <th scope="col" align="center">Price</th>
+                <th scope="col" align="center">Image</th>
+                <th scope="col" align="center">Actions<a href='/products/add/' class="btn chic-a-button" style="margin-left:3px;  background-color: green;">Add product</a></th>
             </tr>
 
-            <c:forEach items="${customers}" var="customer">
+            <c:forEach items="${products}" var="product">
                 <tr>
-                    <td><c:out value="${customer.id}" /></td>
-                    <td><c:out value="${customer.name}" /></td>
-                    <td><c:out value="${customer.phone}" /></td>
-                    <td><c:out value="${customer.email}" /></td>
-                    <td><c:out value="${customer.address}" /></td>
-                    <td><c:out value="${customer.birthday}" /></td>
+                    <td align="center"><c:out value="${product.id}  " /></td>
+                    <td><c:out value="${product.name}" /></td>
+                    <td align="right"><c:out value="${product.weight}" /></td>
+                    <td align="right"><c:out value="${product.price}" /></td>
+                    <td align="center"><img src="${product.image}" width="50px" height="50px"/></td>
                     <td>
-                        <a href="<c:url value="/customers/${customer.id}/edit"/> " class="btn chic-a-button">Edit</a>
-                        <a href="<c:url value="/customers/${customer.id}/orders"/> " class="btn chic-a-button">View Orders</a>
-   			            <a href="<c:url value="/customers/${customer.id}/reports"/>"><img src="/images/icons/xlsx.png"></a>
-                        <a href="<c:url value="/customers/${customer.id}/delete"/>" class="btn btn-danger">Delete</a>
+                        <a href="<c:url value="/products/${product.id}/edit"/> " class="btn chic-a-button">Edit</a>
+                        <a href="<c:url value="/products/${product.id}/delete"/>" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
             </c:forEach>

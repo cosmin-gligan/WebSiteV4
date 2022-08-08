@@ -1,7 +1,6 @@
 package siit.utils;
 
 import org.springframework.stereotype.Service;
-import siit.model.User;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;

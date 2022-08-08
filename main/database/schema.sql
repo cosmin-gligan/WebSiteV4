@@ -48,3 +48,12 @@ CREATE TABLE orders_products
 
 ALTER TABLE products ADD COLUMN IF NOT EXISTS image varchar(150) NOT NULL DEFAULT '';
 ALTER TABLE customers ADD COLUMN IF NOT EXISTS address TEXT NOT NULL DEFAULT '';
+
+
+
+CREATE TABLE IF NOT EXISTS product_categories
+(
+	id serial NOT NULL,
+	name text NOT NULL DEFAULT '',
+	CONSTRAINT pc_id_pkey PRIMARY KEY (id)
+)
